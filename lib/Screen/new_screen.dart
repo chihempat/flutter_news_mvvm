@@ -77,9 +77,9 @@ class _NewScreenState extends State<NewScreen> {
               ),
             ),
             Divider(
-              height: 20,
+              height: 40,
               color: Colors.grey[700],
-              thickness: 10,
+              thickness: 5,
               indent: 30,
               endIndent: 30,
             ),
@@ -89,7 +89,7 @@ class _NewScreenState extends State<NewScreen> {
               child: Text(
                 'Headlines',
                 style: TextStyle(
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.normal,
                   fontSize: 20,
                 ),
               ),

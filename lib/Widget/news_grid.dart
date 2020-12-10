@@ -36,17 +36,19 @@ class NewsGrid extends StatelessWidget {
             child: GridTile(
               child: Container(
                 margin:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 40),
                 child: CircularImage(imageUrl: article.imageUrl),
               ),
               footer: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Text(
-                    article.title,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  )),
+                padding: EdgeInsets.only(left: 15, right: 15, top: 10),
+                child: Text(
+                  article.title,
+                  style: TextStyle(fontWeight: FontWeight.normal),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ),
           );
         },

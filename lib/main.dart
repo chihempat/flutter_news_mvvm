@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'News',
       theme: ThemeData(
+        fontFamily: "Glacial Indifference",
         scaffoldBackgroundColor: Color(0xffFEFDFD),
         appBarTheme: AppBarTheme(
           color: Color(0xffFEFDFD),

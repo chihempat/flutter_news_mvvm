@@ -20,7 +20,10 @@ class CircularImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-      placeholder: (context, url) => CircularProgressIndicator(),
+      placeholder: (context, url) => Container(
+        padding: EdgeInsets.all(50),
+        child: CircularProgressIndicator(),
+      ),
       imageUrl: imageUrl ?? " ",
       imageBuilder: (context, imageProvider) {
         return _imageWidget(imageProvider);

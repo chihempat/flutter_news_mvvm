@@ -24,14 +24,15 @@ class NewsArticleDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: ListTile(
-          contentPadding: EdgeInsets.symmetric(horizontal: 50),
-          horizontalTitleGap: 40,
-          leading: CircleAvatar(backgroundImage: AssetImage("profile.jpeg")),
-          title: Text(
-            this.article.author ?? 'Undefined',
+        title: Align(
+          alignment: Alignment.center,
+          child: ListTile(
+            leading: CircleAvatar(backgroundImage: AssetImage("profile.jpeg")),
+            title: Text(
+              this.article.author ?? 'Undefined',
+            ),
+            subtitle: Text("Author"),
           ),
-          subtitle: Text("Author"),
         ),
       ),
       body: SafeArea(
@@ -56,7 +57,7 @@ class NewsArticleDetailScreen extends StatelessWidget {
                 ),
                 Text(
                   article.title,
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.normal),
                   maxLines: 4,
                   overflow: TextOverflow.clip,
                   textAlign: TextAlign.left,
@@ -65,21 +66,22 @@ class NewsArticleDetailScreen extends StatelessWidget {
                   height: 10,
                 ),
                 Align(
+                  widthFactor: 10,
                   alignment: Alignment.topLeft,
                   child: Text(
                     article.publishedAt ?? " ",
                     textAlign: TextAlign.left,
-                    style: TextStyle(fontWeight: FontWeight.w300, fontSize: 20),
+                    style:
+                        TextStyle(fontWeight: FontWeight.normal, fontSize: 15),
                   ),
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 Text(
-                  article.content.replaceRange(article.content.indexOf("["),
-                          article.content.indexOf("]"), " ") ??
+                  article.content.substring(0, article.content.indexOf("[")) ??
                       article.description,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
+                  style: TextStyle(fontSize: 20),
                   overflow: TextOverflow.visible,
                   textAlign: TextAlign.justify,
                 ),
@@ -103,3 +105,7 @@ class NewsArticleDetailScreen extends StatelessWidget {
     );
   }
 }
+
+// article.content.replaceRange(article.content.indexOf("["),
+// article.content.indexOf("]"), " ") ??
+// article.description,
