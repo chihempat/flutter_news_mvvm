@@ -68,12 +68,10 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Glaicial Indifference
+    - family: GlacialIndifference
       fonts:
-        - asset: assets/font/GlacialIndifference-Bold.otf
-        - asset: assets/font/GlacialIndifference-Italic.otf
-        - asset: assets/font/GlacialIndifference-Regular.otf
-          style: italic
+        - asset: assets/font/GlacialIndifference-Regular.ttf
+
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

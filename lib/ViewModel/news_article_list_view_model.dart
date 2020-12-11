@@ -39,4 +39,20 @@ class NewsArticleListViewModel extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  void topHeadlinesByCategory(String category, String country) async {
+    List<NewsArticle> newsArticle =
+        await WebService().fetchCategoryHeadlines(category, country);
+
+    this.articles = newsArticle
+        .map((article) => NewsArticleViewModel(article: article))
+        .toList();
+
+    if (this.articles.isEmpty) {
+      this.loadingStatus = LoadingStatus.empty;
+    } else {
+      this.loadingStatus = LoadingStatus.completed;
+    }
+    notifyListeners();
+  }
 }

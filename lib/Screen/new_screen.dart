@@ -10,6 +10,9 @@ class NewScreen extends StatefulWidget {
 }
 
 class _NewScreenState extends State<NewScreen> {
+  String country = "India";
+  String category = "general";
+
   @override
   void initState() {
     super.initState();
@@ -20,6 +23,14 @@ class _NewScreenState extends State<NewScreen> {
   void getNewsByCountry(
       NewsArticleListViewModel listViewModel, String country) {
     listViewModel.topHeadlinesByCountry(Constants.Countries[country]);
+  }
+
+  void getNewsByCategory(
+      NewsArticleListViewModel listViewModel, String category, String country) {
+    country = country ?? "India";
+    category = category ?? "General";
+    listViewModel.topHeadlinesByCategory(
+        category, Constants.Countries[country]);
   }
 
   Widget _buildlist(NewsArticleListViewModel listViewModel) {
@@ -46,6 +57,8 @@ class _NewScreenState extends State<NewScreen> {
   @override
   Widget build(BuildContext context) {
     var listViewModel = Provider.of<NewsArticleListViewModel>(context);
+    var w = MediaQuery.of(context).size.width / 1000;
+    var h = MediaQuery.of(context).size.width / 100;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -53,7 +66,13 @@ class _NewScreenState extends State<NewScreen> {
         elevation: 0,
         actions: [
           PopupMenuButton(
-            onSelected: (value) => getNewsByCountry(listViewModel, value),
+            onSelected: (value) {
+              getNewsByCountry(listViewModel, value);
+              setState(() {
+                country = value;
+              });
+              getNewsByCountry(listViewModel, value);
+            },
             icon: Icon(Icons.more_vert),
             itemBuilder: (_) {
               return Constants.Countries.keys
@@ -73,7 +92,7 @@ class _NewScreenState extends State<NewScreen> {
               padding: const EdgeInsets.only(left: 30.0, right: 30),
               child: Text(
                 "News",
-                style: TextStyle(fontSize: 50),
+                style: TextStyle(fontSize: w * 70),
               ),
             ),
             Divider(
@@ -83,6 +102,29 @@ class _NewScreenState extends State<NewScreen> {
               indent: 30,
               endIndent: 30,
             ),
+            Center(
+              child: ButtonBar(
+                  alignment: MainAxisAlignment.center,
+                  overflowDirection: VerticalDirection.down,
+                  buttonAlignedDropdown: false,
+                  children: Constants.Category.map(
+                    (value) => TextButton(
+                      onPressed: () {
+                        setState(() {
+                          category = value;
+                        });
+                        getNewsByCategory(listViewModel, value, country);
+                      },
+                      child: Text(
+                        value.toUpperCase(),
+                        style: TextStyle(
+                            color: Colors.black38,
+                            fontSize: w * 20,
+                            fontWeight: FontWeight.normal),
+                      ),
+                    ),
+                  ).toList()),
+            ),
             Padding(
               padding: const EdgeInsets.only(
                   right: 30, left: 30, top: 15, bottom: 15),
@@ -90,7 +132,7 @@ class _NewScreenState extends State<NewScreen> {
                 'Headlines',
                 style: TextStyle(
                   fontWeight: FontWeight.normal,
-                  fontSize: 20,
+                  fontSize: w * 40,
                 ),
               ),
             ),

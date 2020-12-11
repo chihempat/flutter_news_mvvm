@@ -29,19 +29,19 @@ class NewsArticleDetailScreen extends StatelessWidget {
           child: ListTile(
             leading: CircleAvatar(backgroundImage: AssetImage("profile.jpeg")),
             title: Text(
-              this.article.author ?? 'Undefined',
+              this.article.author ?? 'Anon',
             ),
             subtitle: Text("Author"),
           ),
         ),
       ),
       body: SafeArea(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(20),
@@ -55,33 +55,46 @@ class NewsArticleDetailScreen extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
+                Stack(
+                  alignment: Alignment.centerLeft,
+                  children: <Widget>[
+                    Divider(
+                      height: 80,
+                      color: Colors.grey,
+                      thickness: 20,
+                    ),
+                    Text(
+                      ' Headline',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
                 Text(
-                  article.title,
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.normal),
-                  maxLines: 4,
-                  overflow: TextOverflow.clip,
-                  textAlign: TextAlign.left,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Align(
-                  widthFactor: 10,
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    article.publishedAt ?? " ",
-                    textAlign: TextAlign.left,
-                    style:
-                        TextStyle(fontWeight: FontWeight.normal, fontSize: 15),
+                  this.article.title,
+                  style: TextStyle(
+                    fontSize: 24,
+                    wordSpacing: 3,
                   ),
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 Text(
-                  article.content.substring(0, article.content.indexOf("[")) ??
-                      article.description,
-                  style: TextStyle(fontSize: 20),
+                  this.article.publishedAt,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey,
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  article.content ?? article.description,
+                  style: TextStyle(fontSize: 17),
                   overflow: TextOverflow.visible,
                   textAlign: TextAlign.justify,
                 ),
@@ -90,7 +103,7 @@ class NewsArticleDetailScreen extends StatelessWidget {
                   child: Text(
                     article.url,
                     style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 17,
                         fontWeight: FontWeight.w300,
                         color: Colors.lightBlue),
                     overflow: TextOverflow.visible,
@@ -109,3 +122,6 @@ class NewsArticleDetailScreen extends StatelessWidget {
 // article.content.replaceRange(article.content.indexOf("["),
 // article.content.indexOf("]"), " ") ??
 // article.description,
+
+// article.content.substring(
+// 0, (article.content.indexOf("char")) - 9 ?? 50)
