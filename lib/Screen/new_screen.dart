@@ -57,11 +57,13 @@ class _NewScreenState extends State<NewScreen> {
   @override
   Widget build(BuildContext context) {
     var listViewModel = Provider.of<NewsArticleListViewModel>(context);
+    var width = MediaQuery.of(context).size.width;
     var w = MediaQuery.of(context).size.width / 1000;
     var h = MediaQuery.of(context).size.width / 100;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        toolbarHeight: 30,
         backgroundColor: Colors.white,
         elevation: 0,
         actions: [
@@ -86,13 +88,14 @@ class _NewScreenState extends State<NewScreen> {
         ],
       ),
       body: SafeArea(
+        minimum: EdgeInsets.symmetric(horizontal: width < 1000 ? 0 : 100),
         child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 30.0, right: 30),
               child: Text(
                 "News",
-                style: TextStyle(fontSize: w * 70),
+                style: TextStyle(fontSize: width < 1000 ? 60 : 100),
               ),
             ),
             Divider(
@@ -119,23 +122,27 @@ class _NewScreenState extends State<NewScreen> {
                         value.toUpperCase(),
                         style: TextStyle(
                             color: Colors.black38,
-                            fontSize: w * 20,
+                            fontSize: width < 650
+                                ? 15
+                                : width < 1000
+                                    ? 15
+                                    : 20,
                             fontWeight: FontWeight.normal),
                       ),
                     ),
                   ).toList()),
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  right: 30, left: 30, top: 15, bottom: 15),
-              child: Text(
-                'Headlines',
-                style: TextStyle(
-                  fontWeight: FontWeight.normal,
-                  fontSize: w * 40,
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(
+            //       right: 30, left: 30, top: 15, bottom: 15),
+            //   child: Text(
+            //     'Headlines',
+            //     style: TextStyle(
+            //       fontWeight: FontWeight.normal,
+            //       fontSize: width < 1000 ? 30 : 50,
+            //     ),
+            //   ),
+            // ),
             Expanded(
               child: _buildlist(listViewModel),
             ),
